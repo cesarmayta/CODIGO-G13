@@ -10,7 +10,7 @@ while(opcion == "0"):
     print(" opción 3 - soles a euros")
     print(" opción 4 - euros a soles")
     opcion = input("eliga una opción :")
-    if(opcion == "1"):
+    if(opcion == "1")
         montoDolares = float(montoOrigen) / 3.80
         montoDolaresFormato = "$ {:,.2f}".format(montoDolares)
         #OUTPUTS - SALIDAS
