@@ -2,7 +2,7 @@ import tabulate
 from libAlumnos import (
     buscarAlumno,menu,
     insertarAlumno,actualizarAlumno,
-    eliminarAlumno
+    eliminarAlumno,cargarAlumnos
 )
 
 #PROGRAMA PARA
@@ -14,7 +14,14 @@ from libAlumnos import (
 ####################################
 menu()
 opcion = 0
-alumnos = [{'nombre':'cesar mayta','email':'cesarmayta@gmail.com','celular':'232323'}]
+#alumnos = [{'nombre':'cesar mayta','email':'cesarmayta@gmail.com','celular':'232323'}]
+#alumnos = []
+#cargamos datos del archivo de texto
+f = open('alumnos.txt','r')
+strAlumnos = f.read()
+alumnos = cargarAlumnos(strAlumnos)
+f.close
+
 while(opcion != 5):
     opcion = int(input("INGRESE OPCIÓN DEL MENU :"))
     if(opcion == 1):

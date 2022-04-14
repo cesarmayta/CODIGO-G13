@@ -50,3 +50,17 @@ def actualizarAlumno(indexAlumno,alumnos):
 def eliminarAlumno(indexAlumno,alumnos):
     alumnos.pop(indexAlumno)
     print("ALUMNO ELIMINADO !!!")
+    
+def cargarAlumnos(strAlumnos):
+    alumnos = []
+    #PROCESO PARA CONVERTIR UNA CADENA STRING A UNA LISTA DE DICCIONARIOS
+    listaAlumnos = strAlumnos.splitlines()
+    for l in listaAlumnos:
+        alumnoData = l.split(',')
+        dictAlumno = {
+            'nombre':alumnoData[0],
+            'email':alumnoData[1],
+            'celular':alumnoData[2]
+        }
+        alumnos.append(dictAlumno)
+    return alumnos 
