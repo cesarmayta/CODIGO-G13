@@ -4,6 +4,17 @@ import tabulate
 # READ - R
 # UPDATE - U
 # DELETE - D
+######### FUNCIONES ################
+def buscarAlumno(valorBusqueda,alumnos):
+    indexAlumno = -1
+        for i in range(len(alumnos)):
+            dicAlumnoBusqueda = alumnos[i]
+            for clave,valor in dicAlumnoBusqueda.items():
+                if(valor == valorBusqueda and clave == 'email'):
+                    indexAlumno = i
+                    break
+    return indexAlumno
+####################################
 print("-" * 50)
 print("|" + " " * 9 + "MATRICULA DE ALUMNOS EN CODIGO " + " "* 8 + "|")
 print("-" * 50)
@@ -39,15 +50,9 @@ while(opcion != 5):
         print("ACTUALIZAR ALUMNO")
         #PASO 1 BUSCAR EL ALUMNO A EDITAR
         valorBusqueda = input("Ingrese el email del alumno a actualizar : ")
-        indexAlumno = -1
-        for i in range(len(alumnos)):
-            dicAlumnoBusqueda = alumnos[i]
-            for clave,valor in dicAlumnoBusqueda.items():
-                if(valor == valorBusqueda and clave == 'email'):
-                    indexAlumno = i
-                    break
-        #print("el alumno esta en el indice : " + str(indexAlumno))
-        #print("datos del alumno : " + str(alumnos[indexAlumno]))
+        
+        indexAlumno = buscarAlumno(valorBusqueda,alumnos)
+        
         #PASO 2 INGRESAR LOS NUEVOS VALORES PARA EL ALUMNO A EDITAR
         if(indexAlumno == -1):
             print("No se encontro el email del alumno")
@@ -67,13 +72,9 @@ while(opcion != 5):
         print("ELIMINAR ALUMNO")
         #PASO 1 BUSCAR EL ALUMNO A ELIMINAR
         valorBusqueda = input("Ingrese el email del alumno a eliminar : ")
-        indexAlumno = -1
-        for i in range(len(alumnos)):
-            dicAlumnoBusqueda = alumnos[i]
-            for clave,valor in dicAlumnoBusqueda.items():
-                if(valor == valorBusqueda and clave == 'email'):
-                    indexAlumno = i
-                    break
+        
+        indexAlumno = buscarAlumno(valorBusqueda,alumnos)
+        
         #PASO 2 INGRESAR LOS NUEVOS VALORES PARA EL ALUMNO A ELIMINAR
         if(indexAlumno == -1):
             print("No se encontro el email del alumno")
