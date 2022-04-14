@@ -2,7 +2,8 @@ import tabulate
 from libAlumnos import (
     buscarAlumno,menu,
     insertarAlumno,actualizarAlumno,
-    eliminarAlumno,cargarAlumnos
+    eliminarAlumno,cargarAlumnos,
+    grabarAlumnos
 )
 
 #PROGRAMA PARA
@@ -54,6 +55,12 @@ while(opcion != 5):
             #ELIMINAR EL ALUMNO
            eliminarAlumno(indexAlumno,alumnos)
     elif(opcion == 5):
+        #grabar lois datos en mi archivo de texto
+        strAlumnos = grabarAlumnos(alumnos)
+        #print(strAlumnos)
+        fw = open('alumnos.txt','w')
+        fw.write(strAlumnos)
+        fw.close()
         print("FINALIZANDO PROGRAMA")
     else:
         print("OPCION INCORRECTA")

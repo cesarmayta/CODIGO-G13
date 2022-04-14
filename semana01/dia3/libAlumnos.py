@@ -52,6 +52,9 @@ def eliminarAlumno(indexAlumno,alumnos):
     print("ALUMNO ELIMINADO !!!")
     
 def cargarAlumnos(strAlumnos):
+    """
+    convierte un string a una lista de diccionarios
+    """
     alumnos = []
     #PROCESO PARA CONVERTIR UNA CADENA STRING A UNA LISTA DE DICCIONARIOS
     listaAlumnos = strAlumnos.splitlines()
@@ -63,4 +66,19 @@ def cargarAlumnos(strAlumnos):
             'celular':alumnoData[2]
         }
         alumnos.append(dictAlumno)
-    return alumnos 
+    return alumnos
+
+def grabarAlumnos(alumnos):
+    """
+    convierte una lista de diccionarios en una cada string
+    """
+    strAlumnos = ""
+    for l in alumnos:
+        for clave,valor in l.items():
+            strAlumnos += valor
+            if clave != 'celular':
+                strAlumnos += ','
+            else:
+                strAlumnos += '\n'
+    return strAlumnos
+
