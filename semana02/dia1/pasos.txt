@@ -1,0 +1,18 @@
+#creacion de entorno virtual
+
+python -m venv venv
+
+#para activarlo
+
+#con gitbash en windows
+source venv/scripts/activate
+
+#con cmd en windows
+venv\scripts\activate
+
+#en mac y linux
+source venv/bin/activate
+
+#para desactivar
+
+deactivate

@@ -1,4 +1,0 @@
-cesar mayta,cesarmayta@gmail.com,242332
-ana lopez,ana@gmail.com,2232323
-jorge perez,jorge@gmail.com,242332
-Lucia Madrigal,lucia@gmail.com,22332
