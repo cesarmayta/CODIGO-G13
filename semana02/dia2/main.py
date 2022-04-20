@@ -5,14 +5,12 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     #return '<center><H1>BIENVENIDO A MI SITIO WEB</H1></center>'
-    
     nombre = request.args.get('nombre','')
-
     context = {
         'nombre':nombre
     }
 
-    return render_template('index.html',**context)
+    return render_template('home.html',**context)
 
 @app.route('/peliculas')
 def peliculas():
