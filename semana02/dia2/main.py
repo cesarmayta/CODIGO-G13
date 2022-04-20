@@ -1,14 +1,18 @@
 from flask import Flask,render_template,request
+import requests
+
+URL = 'https://api.github.com/users/cesarmayta'
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     #return '<center><H1>BIENVENIDO A MI SITIO WEB</H1></center>'
-    nombre = request.args.get('nombre','')
-    context = {
-        'nombre':nombre
-    }
+    data = requests.get(URL)
+
+    #nombre = request.args.get('nombre','')
+    context = data.json()
+    print(context)
 
     return render_template('home.html',**context)
 
