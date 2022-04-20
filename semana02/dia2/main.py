@@ -24,4 +24,17 @@ def peliculas():
     }
     return render_template('peliculas.html',**context)
 
+############### RUTAS DE MIS PAGINAS
+@app.route('/acercade')
+def about():
+    return render_template('acercade.html')
+
+@app.route('/portafolio')
+def portafolio():
+    return render_template('portafolio.html')
+
+@app.route('/contacto')
+def contacto():
+    return render_template('contacto.html')
+
 app.run(debug=True)
