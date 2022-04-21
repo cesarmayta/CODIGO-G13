@@ -1,8 +1,8 @@
 from pydoc import doc
 from flask import Flask,render_template,request
-import requests
+#import requests
 
-URL = 'https://api.github.com/users/cesarmayta'
+#URL = 'https://api.github.com/users/cesarmayta'
 
 
 ## para conectarse a firebase
@@ -17,16 +17,27 @@ from firebase_admin import firestore
 
 db = firestore.client()
 
+colBiografia = db.collection('biografia')
+docBiografia = colBiografia.get()
+
+for doc in docBiografia:
+    dicBiografia = doc.to_dict()
+
+
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     #return '<center><H1>BIENVENIDO A MI SITIO WEB</H1></center>'
-    data = requests.get(URL)
+    
+    context = {
+        'biografia':dicBiografia
+    }
+    #data = requests.get(URL)
 
     #nombre = request.args.get('nombre','')
-    context = data.json()
-    print(context)
+    #context = data.json()
+    #print(context)
 
     return render_template('home.html',**context)
 
@@ -45,7 +56,10 @@ def peliculas():
 ############### RUTAS DE MIS PAGINAS
 @app.route('/acercade')
 def about():
-    return render_template('acercade.html')
+    context = {
+        'biografia':dicBiografia
+    }
+    return render_template('acercade.html',**context)
 
 @app.route('/portafolio')
 def portafolio():
