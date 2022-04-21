@@ -5,6 +5,18 @@ import requests
 URL = 'https://api.github.com/users/cesarmayta'
 
 
+## para conectarse a firebase
+import firebase_admin
+from firebase_admin import credentials
+
+cred = credentials.Certificate("token.json")
+firebase_admin.initialize_app(cred)
+
+### para conectarse a firestore
+from firebase_admin import firestore
+
+db = firestore.client()
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -37,7 +49,20 @@ def about():
 
 @app.route('/portafolio')
 def portafolio():
-    return render_template('portafolio.html')
+    colProyectos = db.collection('proyectos')
+    docProyectos = colProyectos.get()
+
+    lstProyectos = []
+    for doc in docProyectos:
+        print(doc.to_dict())
+        dicProyecto = doc.to_dict()
+        lstProyectos.append(dicProyecto)
+
+
+    context = {
+        'proyectos':lstProyectos
+    }
+    return render_template('portafolio.html',**context)
 
 @app.route('/contacto')
 def contacto():
