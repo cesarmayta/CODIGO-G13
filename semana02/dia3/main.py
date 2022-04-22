@@ -25,6 +25,7 @@ app.secret_key = 'qwerty123456'
 @app.route('/')
 def index():
     #return '<center><H1>BIENVENIDO A MI SITIO WEB</H1></center>'
+    #recuperamos la info de la biografia
     colBiografia = db.collection('biografia')
     docBiografia = colBiografia.get()
 
@@ -32,6 +33,17 @@ def index():
         dicBiografia = doc.to_dict()
 
     session['biografia'] = dicBiografia
+
+    #recuperamos la info de los enlaces
+    colEnlaces = db.collection('enlaces')
+    docEnlaces = colEnlaces.get()
+
+    lstEnlaces = []
+    for doc in docEnlaces:
+        dicEnlace = doc.to_dict()
+        lstEnlaces.append(dicEnlace)
+
+    session['enlaces'] = lstEnlaces
 
 
     #data = requests.get(URL)
