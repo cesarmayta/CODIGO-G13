@@ -1,0 +1,4 @@
+#pip install -r requirements.txt
+flask
+firebase_admin
+python-dotenv
