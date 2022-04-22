@@ -1,5 +1,5 @@
 from pydoc import doc
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,session
 #import requests
 
 #URL = 'https://api.github.com/users/cesarmayta'
@@ -17,29 +17,30 @@ from firebase_admin import firestore
 
 db = firestore.client()
 
-colBiografia = db.collection('biografia')
-docBiografia = colBiografia.get()
-
-for doc in docBiografia:
-    dicBiografia = doc.to_dict()
-
-
 app = Flask(__name__)
+
+#creamos una clave secreta para las variables de sesión
+app.secret_key = 'qwerty123456'
 
 @app.route('/')
 def index():
     #return '<center><H1>BIENVENIDO A MI SITIO WEB</H1></center>'
-    
-    context = {
-        'biografia':dicBiografia
-    }
+    colBiografia = db.collection('biografia')
+    docBiografia = colBiografia.get()
+
+    for doc in docBiografia:
+        dicBiografia = doc.to_dict()
+
+    session['biografia'] = dicBiografia
+
+
     #data = requests.get(URL)
 
     #nombre = request.args.get('nombre','')
     #context = data.json()
     #print(context)
 
-    return render_template('home.html',**context)
+    return render_template('home.html')
 
 @app.route('/peliculas')
 def peliculas():
@@ -56,10 +57,7 @@ def peliculas():
 ############### RUTAS DE MIS PAGINAS
 @app.route('/acercade')
 def about():
-    context = {
-        'biografia':dicBiografia
-    }
-    return render_template('acercade.html',**context)
+    return render_template('acercade.html')
 
 @app.route('/portafolio')
 def portafolio():
