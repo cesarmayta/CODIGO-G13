@@ -1,4 +1,7 @@
-from flask import render_template
+from flask import (
+    render_template,redirect,
+    url_for,session,
+    flash)
 
 from . import admin
 
@@ -16,8 +19,11 @@ auth = firebase.auth()
 
 @admin.route('/')
 def index():
-    return render_template('admin/index.html')
-
+    if('token' in session):
+        return render_template('admin/index.html')
+    else:
+        return redirect(url_for('admin.login'))
+        
 @admin.route('/login',methods=['GET','POST'])
 def login():
     login_form = LoginForm()
@@ -33,7 +39,10 @@ def login():
             usuario = auth.sign_in_with_email_and_password(usuarioData,passwordData)
             dataUsuarioValido = auth.get_account_info(usuario['idToken'])
             print(dataUsuarioValido)
+            session['token'] = usuario['idToken']
+            return redirect(url_for('admin.index'))
         except:
             print("usuario incorrecto")
+            flash("Usuario o password invalidos")
 
     return render_template('admin/login.html',**context)
