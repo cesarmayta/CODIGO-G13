@@ -51,3 +51,7 @@ def login():
 def logout():
     session.pop('token')
     return redirect(url_for('admin.login'))
+
+@admin.route('/proyectos')
+def proyectos():
+    return render_template('admin/proyectos.html')
