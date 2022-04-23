@@ -1,0 +1,23 @@
+{% extends 'bootstrap/base.html' %}
+{% block head %}
+    {{ super() }}
+    <title>PANEL DE ADMINISTRACIÓN</title>
+{% endblock %}
+{% block body %}
+    {% if session['token'] %}
+        {% include 'admin/navbar.html' %}
+    {% endif %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-danger alert dismissible">
+            <button type="button"
+                data-dismiss="alert"
+                class="close">&times;</button>
+            {{message}}
+        </div>
+    {% endfor %}
+    {% block content %}
+    {% endblock %}
+    {% block scripts %}
+        {{ super() }}
+    {% endblock %}
+{% endblock %}

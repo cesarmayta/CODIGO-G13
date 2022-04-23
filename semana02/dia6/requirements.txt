@@ -1,0 +1,8 @@
+#pip install -r requirements.txt
+flask
+firebase_admin
+python-dotenv
+#extensiones de flask
+flask-bootstrap #integra boostrap con flask
+Flask-WTF #what the form
+pyrebase4
