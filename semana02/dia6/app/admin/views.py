@@ -17,6 +17,8 @@ firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
 ###########################################
 
+from app.firebaseAdmin import db
+
 @admin.route('/')
 def index():
     if('token' in session):
@@ -54,4 +56,18 @@ def logout():
 
 @admin.route('/proyectos')
 def proyectos():
-    return render_template('admin/proyectos.html')
+    if('token' in session):
+        #obtenemos los proyectos de firestore
+        colProyectos = db.collection('proyectos')
+        docProyectos = colProyectos.get()
+        lstProyectos= []
+        for doc in docProyectos:
+            dicProyecto = doc.to_dict()
+            lstProyectos.append(dicProyecto)
+
+        context = {
+            'proyectos':lstProyectos
+        }
+        return render_template('admin/proyectos.html',**context)
+    else:
+        return redirect(url_for('admin.login'))

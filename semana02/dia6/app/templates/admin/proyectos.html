@@ -12,11 +12,13 @@
                 </tr>
             </thead>
             <tbody>
+                {%for p in proyectos %}
                 <tr>
-                    <td>1</td>
-                    <td>PROYECTO</td>
-                    <td>http:url.com</td>
+                    <td>{{ p['codigo']}}</td>
+                    <td>{{ p['nombre']}}</td>
+                    <td>{{ p['url']}}</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

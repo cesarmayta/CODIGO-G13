@@ -2,18 +2,7 @@ from flask import Flask,render_template,request,session
 
 from . import portafolio
 
-## para conectarse a firebase
-import firebase_admin
-from firebase_admin import credentials
-
-cred = credentials.Certificate("token.json")
-firebase_admin.initialize_app(cred)
-
-### para conectarse a firestore
-from firebase_admin import firestore
-
-db = firestore.client()
-
+from app.firebaseAdmin import db
 
 @portafolio.route('/')
 def home():
