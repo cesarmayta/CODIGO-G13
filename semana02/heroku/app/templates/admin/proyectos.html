@@ -1,0 +1,26 @@
+{% extends 'admin/layout.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block content %}
+    <div class="container">
+        <h3>ADMINISTRACIÓN DE PROYECTOS</h3>
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Url</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for p in proyectos %}
+                <tr>
+                    <td>{{ p['codigo']}}</td>
+                    <td>{{ p['nombre']}}</td>
+                    <td>{{ p['url']}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {{ wtf.quick_form(proyecto_form)}}
+    </div>
+{% endblock %}
