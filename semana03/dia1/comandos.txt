@@ -11,3 +11,6 @@ use cursos
 show tables
 # para ver lcontenido de una tabla
 describe tabla
+
+#para backups
+mysqldump -h localhost -u root -p cursos > cursos.sql
