@@ -35,5 +35,24 @@ def getAlumno():
         "content":data
     })
     
+@app.route('/alumno',methods=['POST'])
+def setAlumno():
+    nombre = request.json['nombre']
+    celular = request.json['celular']
+    github = request.json['github']
+    
+    cursor = mysql.connection.cursor()
+    
+    cursor.execute("insert into tbl_alumno(alumno_nombre,alumno_celular,alumno_github) values('"+ nombre +"','"+ celular +"','"+ github +"')")
+    
+    mysql.connection.commit()
+    
+    cursor.close()
+    
+    return jsonify({
+        "ok":True,
+        "message":"registro insertado exitosamente"
+    })
+    
 if __name__ == "__main__":
     app.run(debug=True,port=5000)
