@@ -14,9 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from django.http import HttpResponse
-from appfront import views
+
 
 def index(request):
     return HttpResponse("<center><h1>Hola mundo en django</h1></center>")
@@ -24,6 +24,6 @@ def index(request):
 
 urlpatterns = [
     path('',index),
-    path('encuesta/',views.app_index),
+    path('encuesta/',include('appfront.urls')),
     path('admin/', admin.site.urls),
 ]
