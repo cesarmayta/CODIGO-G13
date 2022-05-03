@@ -94,6 +94,22 @@ def updateAlumno(id):
         "message":"registro actualizado exitosamente"
     })
 
+@app.route('/alumno/<id>',methods=['DELETE'])
+def deleteAlumno(id):
+    
+    cursor = mysql.connection.cursor()
+    sqlDeleteAlumno = "delete from tbl_alumno "
+    sqlDeleteAlumno += "where alumno_id = '"+ id +"'"
+    cursor.execute(sqlDeleteAlumno)
+
+    mysql.connection.commit()
+
+    cursor.close()
+
+    return jsonify({
+        "ok":True,
+        "message":"registro eliminado exitosamente"
+    })
     
 
 
