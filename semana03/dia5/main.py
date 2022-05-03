@@ -97,19 +97,27 @@ def updateAlumno(id):
 @app.route('/alumno/<id>',methods=['DELETE'])
 def deleteAlumno(id):
     
-    cursor = mysql.connection.cursor()
-    sqlDeleteAlumno = "delete from tbl_alumno "
-    sqlDeleteAlumno += "where alumno_id = '"+ id +"'"
-    cursor.execute(sqlDeleteAlumno)
+    try:
+        cursor = mysql.connection.cursor()
+        sqlDeleteAlumno = "delete from tbl_alumno "
+        sqlDeleteAlumno += "where alumno_id = '"+ id +"'"
+        cursor.execute(sqlDeleteAlumno)
 
-    mysql.connection.commit()
+        mysql.connection.commit()
 
-    cursor.close()
+        cursor.close()
 
-    return jsonify({
-        "ok":True,
-        "message":"registro eliminado exitosamente"
-    })
+        return jsonify({
+            "ok":True,
+            "message":"registro eliminado exitosamente"
+        })
+    except  Exception as err:
+        print(err.__str__())
+        
+        return jsonify({
+            "ok":False,
+            "message":"Error al ejecutar delete : " + err.__str__()
+        }),401
     
 
 
