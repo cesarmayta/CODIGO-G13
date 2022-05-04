@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,10 +13,12 @@
   </head>
   <body>
     <div class="container-fluid">
-      <h1>Recetas</h1>
+      
   
       <div class="container">
+        <h1>Recetas</h1>
         <div class="row">
+          
           {% for receta in recetas %}
           <div class="col-sm">
             <div class="card" style="width: 18rem;">
@@ -50,7 +53,7 @@
               <div class="modal-body">
                 <form method="post" action="{% url 'app:registrarReceta' %}">
                   {% csrf_token %}
-                  {{ frmReceta.as_p }}
+                  {{ frmReceta|crispy }}
                   <p>
                     <button type="submit" class="btn btn-primary">Registrar</button>
                   </p>
