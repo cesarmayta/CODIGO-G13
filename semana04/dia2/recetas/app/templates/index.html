@@ -11,7 +11,23 @@
     <title>recetas</title>
   </head>
   <body>
-    <h1>Recetas</h1>
+    <div class="container-fluid">
+        <h1>Recetas</h1>
+        {% for receta in recetas %}
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ receta.titulo }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">ingredientes:</h6>
+            <p class="card-text">{{ receta.ingredientes }}</p>
+            <h6 class="card-subtitle mb-2 text-muted">preparación:</h6>
+            <p class="card-text">{{ receta.preparacion }}</p>
+            <a href="#" class="card-link">{{ receta.autor }}</a>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+   
+    
 
     
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
