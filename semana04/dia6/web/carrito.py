@@ -29,7 +29,17 @@ class Cart:
                     break
             
         self.save()
+
+    def delete(self,producto):
+        producto_id = str(producto.id)
+        if producto_id in self.cart:
+            del self.cart[producto_id]
+            self.save()
     
+    def clear(self):
+        self.session["cart"] = {}
+        self.session["cartMontoTotal"] = "0"
+        
     def save(self):
         montoTotal = 0
         for key,value in self.cart.items():

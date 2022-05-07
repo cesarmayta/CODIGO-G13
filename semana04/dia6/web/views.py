@@ -46,3 +46,15 @@ def agregarCarrito(request,producto_id):
     
     return render(request,'carrito.html')
 
+def eliminarProductoCarrito(request,producto_id):
+    """
+    funcion que elimina un producto del carrito de compras
+    """
+    objProducto = Producto.objects.get(id=producto_id)
+    carritoProducto = Cart(request)
+    carritoProducto.delete(objProducto)
+    
+    return render(request,'carrito.html')
+
+
+

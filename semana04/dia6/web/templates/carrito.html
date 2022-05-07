@@ -49,7 +49,7 @@ No Space
                         <p class="prod-li-rating-count">12</p>
                     </div>
                     <p class="prod-li-add">
-                        <a href="#" class="button hover-label prod-addbtn"><i class="icon ion-close-round"></i><span>Remove</span></a>
+                        <a href="{% url 'web:eliminarProductoCarrito' value.producto_id %}" class="button hover-label prod-addbtn"><i class="icon ion-close-round"></i><span>Eliminar</span></a>
                     </p>
                     <p class="prod-li-compare">
                         <a href="compare.html" class="hover-label prod-li-compare-btn"><span>Compare</span><i class="icon ion-arrow-swap"></i></a>
