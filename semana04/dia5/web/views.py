@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 from .models import Categoria,Producto
 
-from web.carrito import Cart
+
 
 # Create your views here.
 def index(request):
@@ -33,6 +33,8 @@ def productosPorCategoria(request,categoria_id):
     return render(request,'index.html',context)
 
 ########### CARRITO DE COMPRAS ##############
+
+from web.carrito import Cart
 
 def carrito(request):
     return render(request,'carrito.html')
