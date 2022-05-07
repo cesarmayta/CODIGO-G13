@@ -1,4 +1,3 @@
-import re
 from django.shortcuts import render
 
 from .models import Categoria,Producto
