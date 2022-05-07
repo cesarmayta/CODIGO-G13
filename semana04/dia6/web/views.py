@@ -56,5 +56,10 @@ def eliminarProductoCarrito(request,producto_id):
     
     return render(request,'carrito.html')
 
+def limpiarCarrito(request):
+    carritoProducto = Cart(request)
+    carritoProducto.clear()
+    return render(request,'carrito.html')
+
 
 
