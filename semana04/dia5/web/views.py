@@ -1,6 +1,9 @@
+import re
 from django.shortcuts import render
 
 from .models import Categoria,Producto
+
+from web.carrito import Cart
 
 # Create your views here.
 def index(request):
@@ -28,3 +31,17 @@ def productosPorCategoria(request,categoria_id):
         'categorias':listaCategorias
     }
     return render(request,'index.html',context)
+
+########### CARRITO DE COMPRAS ##############
+
+def carrito(request):
+    return render(request,'carrito.html')
+
+def agregarCarrito(request,producto_id):
+    objProducto = Producto.objects.get(id=producto_id)
+    carritoProducto = Cart(request)
+    carritoProducto.add(objProducto,1)
+    print(request.session.get("cart"))
+    
+    return render(request,'carrito.html')
+
