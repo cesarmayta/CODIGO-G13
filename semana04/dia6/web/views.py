@@ -61,5 +61,10 @@ def limpiarCarrito(request):
     carritoProducto.clear()
     return render(request,'carrito.html')
 
+############# LOGIN DE USUARIOS ###################
+
+def loginUsuario(request):
+    return render(request,'login.html')
+
 
 
