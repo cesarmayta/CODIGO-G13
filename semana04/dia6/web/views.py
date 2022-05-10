@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 
-from .models import Categoria,Producto
+from .models import Categoria, PedidoDetalle,Producto
 
 
 
@@ -162,6 +162,38 @@ def actualizarCliente(request):
     }
 
     return render(request,'cuenta.html',context)
+
+
+########### PEDIDOS ########################
+from .models import Pedido,PedidoDetalle
+
+def registrarPedido(request):
+    if request.user.id is not None:
+        #registra cabecera del pedido
+        clientePedido = Cliente.objects.get(usuario=request.user)
+        nuevoPedido = Pedido()
+        nuevoPedido.cliente = clientePedido
+        nuevoPedido.save()
+
+        #registra detalle del pedido
+        carritoPedido = request.session.get("cart")
+        for key,value in carritoPedido.items():
+
+            productoPedido = Producto.objects.get(pk=value["producto_id"])
+
+            nuevoPedidoDetalle = PedidoDetalle()
+            nuevoPedidoDetalle.pedido = nuevoPedido
+            nuevoPedidoDetalle.producto = productoPedido
+            nuevoPedidoDetalle.cantidad = int(value["cantidad"])
+            nuevoPedidoDetalle.save()
+
+        carrito = Cart(request)
+        carrito.clear()
+
+        return render(request,'gracias.html')
+
+    else:
+        return redirect('/login')
 
 
 
