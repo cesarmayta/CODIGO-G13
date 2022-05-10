@@ -67,7 +67,22 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 
 def loginUsuario(request):
-    return render(request,'login.html')
+    context = {}
+    if request.method ==  'POST':
+        #login de usuarios
+        dataUsuario = request.POST['usuario']
+        dataPassword = request.POST['password']
+
+        usuarioAuth = authenticate(request,username=dataUsuario,password=dataPassword)
+        if usuarioAuth is not None:
+            login(request,usuarioAuth)
+            return render(request,'cuenta.html')
+        else:
+            context = {
+                'error':'datos incorrectos'
+            }
+
+    return render(request,'login.html',context)
 
 def crearUsuario(request):
     if request.method == 'POST':
