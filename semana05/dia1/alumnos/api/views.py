@@ -83,3 +83,22 @@ def profesor(request):
             return Response(serProfesor.data)
         else:
             return Response(serProfesor.errors)
+
+@api_view(['GET','PUT','DELETE'])
+def profesor_detail(request,profesor_id):
+    objProfesor = Profesor.objects.get(id=profesor_id)
+
+    if request.method == 'GET':
+        serProfesor = ProfesorSerializer(objProfesor)
+        return Response(serProfesor.data)
+
+    elif request.method=='PUT':
+        serProfesor = ProfesorSerializer(objProfesor,data=request.data)
+        if serProfesor.is_valid():
+            serProfesor.save()
+            return Response(serProfesor.data)
+        else:
+            return Response(serProfesor.errors)
+    elif request.method == 'DELETE':
+        objProfesor.delete()
+        return Response(status=204)
