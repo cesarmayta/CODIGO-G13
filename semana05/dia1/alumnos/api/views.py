@@ -49,3 +49,18 @@ def getAlumnos(request):
     }
     return Response(context)
 
+@api_view(['POST'])
+def setAlumno(request):
+    serAlumno = AlumnoSerializer(data=request.data)
+    serAlumno.is_valid(raise_exception=True)
+
+    nuevoAlumno = serAlumno.save()
+
+    context = {
+        'status':'ok',
+        'message':'alumno creado',
+        'data':AlumnoSerializer(nuevoAlumno).data
+    }
+
+    return Response(context)
+
