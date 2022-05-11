@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Alumno
+from .models import Alumno,Profesor
 
 class AlumnoSerializer(serializers.Serializer):
     nombre = serializers.CharField()
@@ -8,3 +8,8 @@ class AlumnoSerializer(serializers.Serializer):
 
     def create(self,validated_data):
         return Alumno.objects.create(**validated_data)
+
+class ProfesorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profesor
+        fields = '__all__'

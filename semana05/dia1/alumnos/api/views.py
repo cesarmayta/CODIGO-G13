@@ -64,3 +64,22 @@ def setAlumno(request):
 
     return Response(context)
 
+######### ENDPOINTS PROFESOR
+from .models import Profesor
+from .serializers import ProfesorSerializer
+
+@api_view(['GET','POST'])
+def profesor(request):
+    if request.method == 'GET':
+        lstProfesores = Profesor.objects.all()
+        serProfesores = ProfesorSerializer(lstProfesores,many=True)
+        
+        return Response(serProfesores.data)
+
+    elif request.method == 'POST':
+        serProfesor = ProfesorSerializer(data=request.data)
+        if serProfesor.is_valid():
+            serProfesor.save()
+            return Response(serProfesor.data)
+        else:
+            return Response(serProfesor.errors)
