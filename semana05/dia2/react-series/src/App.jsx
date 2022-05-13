@@ -24,6 +24,7 @@ class App extends Component{
     this.cambioRating = this.cambioRating.bind(this);
     this.cambioCategoria = this.cambioCategoria.bind(this);
     this.guardar = this.guardar.bind(this);
+    this.editar = this.editar.bind(this);
   }
 
   cambioNombre(e){
@@ -56,6 +57,21 @@ class App extends Component{
     })
   }
 
+  editar(cod,index){
+    axios.get('http://localhost:8000/api/serie/'+cod)
+    .then(res=>{
+      this.setState({
+        pos:index,
+        titulo:'Editar',
+        id:res.data.id,
+        nombre:res.data.name,
+        fecha:res.data.release_date,
+        rating:res.data.rating,
+        categoria:res.data.category
+      })
+    })
+  }
+
   guardar(e){
     e.preventDefault();
     let cod = this.state.id;
@@ -67,6 +83,24 @@ class App extends Component{
     }
     if(cod>0){
       //actualizar
+      axios.put('http://localhost:8000/api/serie/'+cod,datos)
+      .then(res =>{
+        let indx = this.state.pos
+        this.state.series[indx] = res.data;
+        var temp = this.state.series;
+        this.setState({
+          pos:null,
+          titulo:'Nuevo',
+          id:0,
+          nombre:'',
+          fecha:'',
+          rating:0,
+          categoria:'',
+          series:temp
+        })
+      }).catch((error)=>{
+        console.log(error.toString());
+      });
     }
     else{
       //nuevo registro
@@ -113,7 +147,9 @@ class App extends Component{
                   <td>{serie.release_date}</td>
                   <td>{serie.rating}</td>
                   <td>{serie.category}</td>
-                  <td></td>
+                  <td>
+                    <Button variant="success" onClick={()=>this.editar(serie.id,index)}>Editar</Button>
+                  </td>
                 </tr>
               )
             })}
