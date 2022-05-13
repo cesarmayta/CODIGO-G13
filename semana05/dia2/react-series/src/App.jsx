@@ -3,6 +3,8 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 class App extends Component{
   constructor(props){
@@ -17,6 +19,33 @@ class App extends Component{
       rating:'0',
       categoria:''
     })
+    this.cambioNombre = this.cambioNombre.bind(this);
+    this.cambioFecha = this.cambioFecha.bind(this);
+    this.cambioRating = this.cambioRating.bind(this);
+    this.cambioCategoria = this.cambioCategoria.bind(this);
+    this.guardar = this.guardar.bind(this);
+  }
+
+  cambioNombre(e){
+    console.log("actulizando nombre : " + e.target.value)
+    this.setState({
+      nombre: e.target.value
+    })
+  }
+  cambioFecha(e){
+    this.setState({
+      fecha: e.target.value
+    })
+  }
+  cambioRating(e){
+    this.setState({
+      rating: e.target.value
+    })
+  }
+  cambioCategoria(e){
+    this.setState({
+      categoria: e.target.value
+    })
   }
 
   componentDidMount(){
@@ -25,6 +54,38 @@ class App extends Component{
       console.log(res.data)
       this.setState({series: res.data})
     })
+  }
+
+  guardar(e){
+    e.preventDefault();
+    let cod = this.state.id;
+    const datos = {
+      name:this.state.nombre,
+      release_date: this.state.fecha,
+      rating:this.state.rating,
+      category:this.state.categoria
+    }
+    if(cod>0){
+      //actualizar
+    }
+    else{
+      //nuevo registro
+      axios.post('http://localhost:8000/api/series/',datos)
+      .then(res => {
+        this.state.series.push(res.data);
+        var temp = this.state.series;
+        this.setState({
+          id:0,
+          nombre:'',
+          fecha:'',
+          rating:0,
+          categoria:'',
+          series:temp
+        });
+      }).catch((error)=>{
+        console.log(error.toString());
+      });
+    }
   }
 
   render(){
@@ -58,6 +119,30 @@ class App extends Component{
             })}
           </tbody>
         </Table>
+        <br/>
+        <h1>{this.state.titulo}</h1>
+        <Form onSubmit={this.guardar}>
+          <Form.Control type="hidden" value={this.state.id} />
+          <Form.Group className="mb-3">
+            <Form.Label>Nombre:</Form.Label>
+            <Form.Control type="text" value={this.state.nombre} onChange={this.cambioNombre} />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Fecha:</Form.Label>
+            <Form.Control type="date" value={this.state.fecha} onChange={this.cambioFecha} />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Rating:</Form.Label>
+            <Form.Control type="text" value={this.state.rating} onChange={this.cambioRating} />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Categoria:</Form.Label>
+            <Form.Control type="text" value={this.state.categoria} onChange={this.cambioCategoria} />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            GUARDAR
+          </Button>
+        </Form>
         </Container>
       </div>
     )
