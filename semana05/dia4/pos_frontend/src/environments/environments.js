@@ -1,2 +1,3 @@
-export const URL_BACKEND = 'https://backposapi.herokuapp.com'
+export const URL_BACKEND = 'http://127.0.0.1:8000'
+//'https://backposapi.herokuapp.com'
 	
