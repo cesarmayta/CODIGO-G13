@@ -7,5 +7,6 @@ urlpatterns = [
     path('categoria',views.CategoriaView.as_view()),
     path('mesa',views.MesaView.as_view()),
     path('plato',views.PlatoView.as_view()),
-    path('categoria/<int:categoria_id>/platos',views.CategoriaPlatosView.as_view())
+    path('categoria/<int:categoria_id>/platos',views.CategoriaPlatosView.as_view()),
+    path('pedido',views.PedidoView.as_view())
 ]
