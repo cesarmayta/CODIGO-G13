@@ -18,3 +18,9 @@ class PlatoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Plato
         fields = '__all__'
+
+class CategoriaPlatosSerializer(serializers.ModelSerializer):
+    Platos = PlatoSerializer(many=True,read_only=True)
+    class Meta:
+        model = Categoria
+        fields = ['categoria_id','categoria_nom','Platos']

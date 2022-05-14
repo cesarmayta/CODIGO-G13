@@ -6,6 +6,7 @@ from .models import (
 )
 
 from .serializers import(
+    CategoriaPlatosSerializer,
     CategoriaSerializer,
     MesaSerializer,
     PlatoSerializer
@@ -55,6 +56,19 @@ class PlatoView(APIView):
         context = {
             'ok':True,
             'content':serPlato.data
+        }
+
+        return Response(context)
+
+class CategoriaPlatosView(APIView):
+
+    def get(self,request,categoria_id):
+        dataCategoria = Categoria.objects.get(pk=categoria_id)
+        serCategoriaPlatos = CategoriaPlatosSerializer(dataCategoria)
+
+        context = {
+            'ok':True,
+            'content':serCategoriaPlatos.data
         }
 
         return Response(context)
