@@ -33,8 +33,8 @@ export const iniciarSesionAction = (correo, password) => {
 			}
 		);
 		if (response.status === 200) {
-			console.log(response.data);
-			let { token } = response.data;
+			console.log(response.data.access);
+			let token  = response.data.access;
 			localStorage.setItem('token', token);
 			let payload = token.split('.')[1];
 			let payloadDecoded = atob(payload);
