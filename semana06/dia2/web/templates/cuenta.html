@@ -1,0 +1,17 @@
+{% extends "layout.html" %} 
+{% block content %}
+<h1 class="maincont-ttl">Mi cuenta - {{ user.get_username  }}</h1>
+    <ul class="b-crumbs">
+        <li>Mi cuenta</li>
+    </ul>
+    <h2>{{mensaje}}</h2>
+    <article class="page-cont">
+        <form method="post" action="{% url 'web:actualizarCliente' %}" class="register">
+            {% csrf_token %}
+            {{ frmCliente.as_p }}
+            <p class="auth-sumit">
+                <input type="submit" value="Actualizar">
+            </p>
+        </form>
+    </article>
+{% endblock %}
