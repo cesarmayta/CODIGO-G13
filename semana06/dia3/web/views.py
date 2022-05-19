@@ -174,56 +174,70 @@ from paypal.standard.forms import PayPalPaymentsForm
 def registrarPedido(request):
     if request.user.id is not None:
         #registra cabecera del pedido
-        clientePedido = Cliente.objects.get(usuario=request.user)
-        nuevoPedido = Pedido()
-        nuevoPedido.cliente = clientePedido
-        nuevoPedido.save()
+        try:
+            clientePedido = Cliente.objects.get(usuario=request.user)
+            nuevoPedido = Pedido()
+            nuevoPedido.cliente = clientePedido
+            nuevoPedido.save()
 
-        #registra detalle del pedido
-        carritoPedido = request.session.get("cart")
-        totalPedido = 0
-        for key,value in carritoPedido.items():
+            #registra detalle del pedido
+            carritoPedido = request.session.get("cart")
+            totalPedido = 0
+            for key,value in carritoPedido.items():
 
-            productoPedido = Producto.objects.get(pk=value["producto_id"])
+                productoPedido = Producto.objects.get(pk=value["producto_id"])
 
-            nuevoPedidoDetalle = PedidoDetalle()
-            nuevoPedidoDetalle.pedido = nuevoPedido
-            nuevoPedidoDetalle.producto = productoPedido
-            nuevoPedidoDetalle.cantidad = int(value["cantidad"])
-            nuevoPedidoDetalle.save()
-            totalPedido += float(value["cantidad"]) * float(productoPedido.precio)
+                nuevoPedidoDetalle = PedidoDetalle()
+                nuevoPedidoDetalle.pedido = nuevoPedido
+                nuevoPedidoDetalle.producto = productoPedido
+                nuevoPedidoDetalle.cantidad = int(value["cantidad"])
+                nuevoPedidoDetalle.save()
+                totalPedido += float(value["cantidad"]) * float(productoPedido.precio)
 
-        #### REGISTRAMOS EL TOTAL DEL PEDIDO
-        nuevoPedido.total = totalPedido
-        nuevoPedido.save()
+            #### REGISTRAMOS EL TOTAL DEL PEDIDO
+            nuevoPedido.total = totalPedido
+            nuevoPedido.save()
 
-        ###BOTON DE PAYPAL
-        request.session['paypal_pid'] = nuevoPedido.id
-        host = request.get_host()
-        paypal_datos = {
-            'business': settings.PAYPAL_RECEIVER_EMAIL,
-            'amount': totalPedido,
-            'item_name':'PEDIDO #' + str(nuevoPedido.id),
-            'invoice': str(nuevoPedido.id),
-            'notify_url':'http://' + host + '/' + 'paypal-ipn',
-            'return_url':'http://' + host + '/' + 'pedidopagado'
-        }
+            ###BOTON DE PAYPAL
+            request.session['paypal_pid'] = nuevoPedido.id
+            host = request.get_host()
+            paypal_datos = {
+                'business': settings.PAYPAL_RECEIVER_EMAIL,
+                'amount': totalPedido,
+                'item_name':'PEDIDO #' + str(nuevoPedido.id),
+                'invoice': str(nuevoPedido.id),
+                'notify_url':'http://' + host + '/' + 'paypal-ipn',
+                'return_url':'http://' + host + '/' + 'pedidopagado'
+            }
 
-        formPedidoPaypal = PayPalPaymentsForm(initial=paypal_datos)
+            formPedidoPaypal = PayPalPaymentsForm(initial=paypal_datos)
 
-        context = {
-            'pedido':nuevoPedido,
-            'formpaypal':formPedidoPaypal
-        }
+            context = {
+                'pedido':nuevoPedido,
+                'formpaypal':formPedidoPaypal
+            }
 
 
-        carrito = Cart(request)
-        carrito.clear()
+            carrito = Cart(request)
+            carrito.clear()
 
-        return render(request,'pago.html',context)
-
+            return render(request,'pago.html',context)
+        except:
+            return redirect('/login')
     else:
         return redirect('/login')
+
+def pedidopagado(request):
+    pedidoID = request.session.get("paypal_pid")
+    nroRecibo = request.GET.get('PayerID','')
+    print("nro de recibo paypal:" + nroRecibo)
+    print("id de pedido : " + str(pedidoID))
+    pedidoEditar = Pedido.objects.get(pk=pedidoID)
+    pedidoEditar.estado = 'pagado'
+    pedidoEditar.nro_recibo = nroRecibo
+    pedidoEditar.save()
+
+    return render(request,'gracias.html')
 
 
 
