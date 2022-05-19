@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% block content %}
+<main id="main" class="site-main">
+    <div class="cont maincont">
+        <h1 class="maincont-ttl">CONFIRMACIÓN DE PEDIDO</h1>
+        <div class="page-styling">
+            <div class="auth-wrap">
+                    <h3>Pedido Nro : {{ pedido.id }} - FECHA : {{ pedido.fecha_reg }}</h3>
+                    <div class="woocommerce prod-litems section-list">
+                        {% for pd in pedido.pedidodetalle_set.all %}
+                        <article class="prod-li sectls">
+                            <div class="prod-li-inner">
+                                <a href="product.html" class="prod-li-img">
+                                    <img src="{{ pd.producto.imagen.url }}" alt="">
+                                </a>
+                                <div class="prod-li-cont">
+                                    <div class="prod-li-ttl-wrap">
+                                        <p>
+                                            <a href="#">{{ pd.producto.categoria.nombre }}</a>
+                                        </p>
+                                        <h3><a href="product.html">{{ pd.producto.nombre }}</a></h3>
+                                    </div><!--
+                                    No Space
+                                --><div class="prod-li-prices">
+                                        <div class="prod-li-price-wrap">
+                                            <p>Price</p>
+                                            <p class="prod-li-price">${{ pd.producto.precio }}</p>
+                                        </div>
+                                        <div class="prod-li-qnt-wrap">
+                                            <p class="qnt-wrap prod-li-qnt">
+                                                <a href="#" class="qnt-plus prod-li-plus"><i class="icon ion-arrow-up-b"></i></a>
+                                                <input type="text" value="{{ pd.cantidad }}">
+                                                <a href="#" class="qnt-minus prod-li-minus"><i class="icon ion-arrow-down-b"></i></a>
+                                            </p>
+                                        </div>
+                                    </div><!--
+                                    No Space
+                                    --></div>
+                                </div>
+                        </article>
+                       
+                        {% endfor %}
+                        
+            </div>
+        </div>
+        
+        <div class="cart-actions">
+            
+            <div class="cart-collaterals">
+                {{ formpaypal.render }}
+                <div class="order-total">
+                    <p class="cart-totals-ttl">Total</p>
+                    <p class="cart-totals-val">{{ pedido.total }}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+{% endblock %}
