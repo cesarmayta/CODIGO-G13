@@ -1,0 +1,71 @@
+COMANDOS PARA MONGO DB
+
+comandos basicos
+1) mongo
+    inicia el servidor y el mongo shell
+2) show dbs
+    muestra las bases de datos
+3) use cursos
+    crea una base de datos llamada cursos
+4) db.alumnos.insertOne({nombre:'tunombre',email:'tuemail'});
+    crea un documento dentro de la colección llamada alumnos
+5) db.alumnos.find().pretty()
+    muestra los documentos de la colección alumnos
+
+operaciones crud
+https://www.mongodb.com/docs/manual/crud/
+
+ db.alumnos.insertMany([{},{},{}])
+
+ db.alumnos.insertMany([{nombre:"laura pacheco",email:"laura@gmail.com",nota:20},{nombre:"jose lopez",email:"jose@hotmail.com",nota:10},{nombre:"Ana Rivera",email:"anita@hotmail.com",nota:15}]);
+ db.alumnos.updateOne({"nombre":"cesar mayta"},{$set: {nota:11}});
+ db.alumnos.updateOne({nombre:"Ana Rivera"},{$set:{email:"anarivera@claro.com.pe"}});
+ db.alumnos.updateOne({_id : ObjectId("6286f5c57b00cbeb4b6a1dca")},{$set:{nombre:"Luis Madrigal",email:"luis@yahoo.com",nota:9}});
+ db.alumnos.deleteOne({"_id" : ObjectId("6286f5c57b00cbeb4b6a1dcb")});
+
+query documents:
+crear base de datos demo e insertar los siguientes registros
+use demo
+db.inventory.insertMany([
+   { item: "journal", qty: 25, size: { h: 14, w: 21, uom: "cm" }, status: "A" },
+   { item: "notebook", qty: 50, size: { h: 8.5, w: 11, uom: "in" }, status: "A" },
+   { item: "paper", qty: 100, size: { h: 8.5, w: 11, uom: "in" }, status: "D" },
+   { item: "planner", qty: 75, size: { h: 22.85, w: 30, uom: "cm" }, status: "D" },
+   { item: "postcard", qty: 45, size: { h: 10, w: 15.25, uom: "cm" }, status: "A" }
+]);
+
+
+PROYECCIONES
+https://www.mongodb.com/docs/manual/reference/operator/projection/positional/
+
+AGREGACIONES
+https://www.mongodb.com/docs/manual/core/aggregation-pipeline/
+
+
+db.orders.aggregate( [
+   {
+      $match:
+      {
+         "date": { $gte: new ISODate( "2020-01-30" ), $lt: new ISODate( "2022-01-30" ) }
+      }
+   },
+   {
+      $group:
+      {
+         _id: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
+         totalOrderValue: { $sum: { $multiply: [ "$price", "$quantity" ] } },
+         averageOrderQuantity: { $avg: "$quantity" }
+      }
+   },
+   {
+      $sort: { totalOrderValue: -1 }
+   }
+
+ ] )
+
+
+ # para conectar python con mongo
+ 1 - python -m venv venv
+ 2 - source venv/Scripts/activate
+ 3 - pip install pymongo
+ 4 - crear archivo .gitingore y escribir venv/
