@@ -1,0 +1,30 @@
+[{
+    "fecha":"2022-05-20T14:10:30Z",
+    "alumno":{
+        "codigo":1,
+        "nombre":"cesar mayta"
+    },
+    "nivel":{
+        "nombre":"basico"
+    },
+    "modulo":{
+        "nombre":"backend"
+    },
+    "cursos":[
+        {
+            "_id":1,
+            "nombre":"python",
+            "nota":0
+        },
+        {
+            "_id":2,
+            "nombre":"flask",
+            "nota":10
+        },
+        {
+            "_id":3,
+            "nombre":"django",
+            "nota":20
+        }
+    ]
+}]

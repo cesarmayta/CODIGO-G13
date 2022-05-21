@@ -1,0 +1,14 @@
+[
+    {
+        "_id":1,
+        "nombre":"python"
+    },
+    {
+        "_id":2,
+        "nombre":"flask rest"
+    },
+    {
+        "_id":3,
+        "nombre":"django"
+    }
+]
