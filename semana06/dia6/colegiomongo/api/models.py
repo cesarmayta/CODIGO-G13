@@ -1,4 +1,3 @@
-from unittest.util import _MAX_LENGTH
 from djongo import models
 
 class Alumno(models.Model):
