@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'api',
     'rest_framework',
+    'rest_framework_mongoengine',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,12 +76,15 @@ WSGI_APPLICATION = 'colegiomongo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-       'default': {
-           'ENGINE': 'djongo',
-           'NAME': 'db_colegio',
-       }
-   }
+import mongoengine
+mongoengine.connect(db='db_colegio', host='localhost')
+
+#DATABASES = {
+ #      'default': {
+  #         'ENGINE': 'djongo',
+   #        'NAME': 'db_colegio',
+   #    }
+   #}
 
 
 # Password validation

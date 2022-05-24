@@ -10,3 +10,10 @@ class MatriculaView(APIView):
         dataMatricula = Matricula.objects.all()
         serMatricula = MatriculaSerializer(dataMatricula,many=True)
         return Response(serMatricula.data)
+
+    def post(self,request):
+        serMatricula = MatriculaSerializer(data=request.data)
+        serMatricula.is_valid(raise_exception=True)
+        serMatricula.save()
+
+        return Response(serMatricula.data)
