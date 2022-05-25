@@ -1,0 +1,37 @@
+# PASO 1 - CONECTARSE VIA SSH
+
+ssh codigo@192.168.0.100
+
+si sale mensaje de advertencia ejecutar comando
+
+ssh-keygen -R 192.168.0.100
+
+# PASO 2 - ACTUALIZAR EL SISTEMA
+
+sudo apt update
+sudo apt dist-upgrade
+colocar clave de sudo : codigo2022
+
+#PASO 3  - INSTALAR Y CONFIGURAR PYTHON
+instalamos venv
+sudo apt install python3.8-venv
+sudo apt install python3-pip
+python3 -m ven venv
+source venv/bin/activate
+pip install django
+
+#PASO 4 - CREAMOS PROYECTO DE PRUEBA
+django-admin startproject prueba
+
+#PASO 5 - EDITAMOS ARCHIVO SETTINGS.PY
+cd prueba
+sudo vim settings.py
+editar ALLOWED_HOST = ['*']
+
+guardar con esc + :wq
+
+para verificar
+cat settings.py
+
+#PASO 6 - DESPLEGAMOS django
+python3 manage.py runserver 0.0.0.0:8000
