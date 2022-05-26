@@ -1,3 +1,12 @@
+NOTA:
+debes tener los siguientes datos para poder utilizar tu servidor via remota
+dirección ip del servidor : 192.168.0.22
+usuario y clave : codigo codigo2022
+
+tener instalado en el servidor el servidor ssh
+sudo apt install openssh-server
+
+
 # PASO 1 - CONECTARSE VIA SSH
 
 ssh codigo@192.168.0.100
