@@ -77,6 +77,27 @@ function alumnoApi(app){
             console.log(err)
         }
     })
+
+    router.delete("/:id",async function(req,res){
+        const {id} = req.params;
+
+        try{
+            const deleteAlumno = await objAlumnoService.delete(id);
+            if(deleteAlumno){
+                res.status(201).json({
+                    status:true,
+                    content:'alumno eliminado'
+                })
+            }else{
+                res.status(204).json({
+                    status:false,
+                    content:'no hay registros'
+                })
+            }
+        }catch(err){
+            console.log(err)
+        }
+    })
 }
 
 module.exports = alumnoApi;
