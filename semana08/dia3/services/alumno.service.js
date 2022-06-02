@@ -28,6 +28,21 @@ class AlumnoService{
         return result;
     }
 
+    async update({data,id}){
+        const sqlUpdate = `update tbl_alumno set 
+                           alumno_nombre = '${data.nombre}'
+                           ,alumno_email = '${data.email}'
+                           ,alumno_celular = '${data.celular}'
+                           ,alumno_github = '${data.github}'
+                           where alumno_id = '${id}'
+                           `
+        await this.sql.querySql(sqlUpdate);
+        const sqlAlumnoActualizado = `select * from tbl_alumno where alumno_id = '${id}'`;
+        const result = await this.sql.querySql(sqlAlumnoActualizado);
+        return result;
+
+    }
+
 }
 
 module.exports = AlumnoService;
