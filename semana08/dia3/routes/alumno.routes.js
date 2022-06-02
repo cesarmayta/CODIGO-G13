@@ -1,4 +1,5 @@
 const express = require('express');
+const { route } = require('express/lib/application');
 const AlumnoService = require('../services/alumno.service');
 
 function alumnoApi(app){
@@ -16,6 +17,41 @@ function alumnoApi(app){
             })
         }catch(err){
             console.log(err)
+        }
+    })
+
+    router.get("/:id",async function(req,res){
+        const {id} = req.params;
+        try{
+            const alumno = await objAlumnoService.getById(id);
+            if(alumno.length > 0){
+                res.status(200).json({
+                    status:true,
+                    content:alumno
+                })
+            }else{
+                res.status(204).json({
+                    status:false,
+                    content:'no hay registros'
+                })
+            }
+            
+        }catch(err){
+            console.log(err)
+        }
+    })
+
+    router.post("/",async function(req,res){
+        const {body: alumno} = req;
+        console.log(alumno);
+        try{
+            const crearAlumno = await objAlumnoService.create({alumno});
+            res.status(201).json({
+                status:true,
+                content:crearAlumno
+            })
+        }catch(err){
+            console.log(err);
         }
     })
 }
