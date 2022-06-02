@@ -1,5 +1,8 @@
 const { application } = require('express');
 const express = require('express');
+const {config} = require('./config');
+
+const alumnoApi = require('./routes/alumno.routes');
 
 const app = express();
 
@@ -12,4 +15,6 @@ app.get('/',(req,res)=>{
     })
 })
 
-app.listen(5000,()=>console.log('servidor en http://localhost:5000'));
+alumnoApi(app);
+
+app.listen(config.port,()=>console.log('servidor en http://localhost:'+config.port));

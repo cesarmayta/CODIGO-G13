@@ -15,6 +15,7 @@ class MysqlLib{
     async getConnection(){
         try{
             const pool = await mysql.createPool(this.dbSettings);
+            console.log("estas conectado");
             return pool;
         }catch(err){
             console.error(err);
@@ -25,7 +26,7 @@ class MysqlLib{
         const pool = await this.getConnection();
         return new Promise(function(resolve,reject){
             pool.query(sql,function(err,result,fields){
-                if(!err) resolve(JSON.parse(JSON(stringify(result))));
+                if(!err) resolve(JSON.parse(JSON.stringify(result)));
                 else reject(err);
             })
         })
