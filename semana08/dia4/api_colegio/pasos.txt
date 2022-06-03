@@ -1,0 +1,11 @@
+pasos para configuración basica de express con mysql
+
+1) npm init -y
+2) npm install express mysql dotenv
+3) npm install --save-dev nodemon
+4) crear script en packege.json
+    "scripts": {
+        "dev": "nodemon index.js",
+        "start": "node index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    }
