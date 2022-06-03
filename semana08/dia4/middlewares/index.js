@@ -1,7 +1,9 @@
 const express  = require('express');
+const morgan = require('morgan');
 
 const app = express();
 
+app.use(morgan('combined'))
 app.use(function (req, res, next) {
     console.log('Time:', Date.now());
     next();

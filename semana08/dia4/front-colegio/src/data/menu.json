@@ -1,0 +1,16 @@
+[
+  {
+    "groupname": "main",
+    "id": 1,
+    "uuid": "433b8a76-88c5-11ea-bc55-0242ac1564787485730003",
+    "children": [
+      {
+        "uuid": "dumy-uuid",
+        "name": "Alumnos",
+        "to": "/alumnos",
+        "icon": false,
+        "children": false
+      }
+    ]
+  }  
+]

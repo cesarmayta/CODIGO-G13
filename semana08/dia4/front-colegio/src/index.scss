@@ -1,0 +1,37 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css");
+
+//css
+@import "~bootstrap/scss/bootstrap";
+
+
+.main-content {
+    padding: 15px 15px;
+    padding-top: 0px;
+    padding-bottom: 40px;
+      margin-left:240px !important;
+      transition: all .5s ease;
+      background-repeat: repeat;
+  
+      &.nav-collapsed{
+          margin-left:60px !important;
+          height: 100%;
+          transition: all .5s ease;
+          background-repeat: repeat;
+      }
+  }
+//@extend
+
+// icon
+@import "./assets/fontawesome-pro/css/all.css";
+@import "~font-awesome/css/font-awesome.min.css";
+@import "~simple-line-icons/css/simple-line-icons.css";
+@import "~weather-icons/css/weather-icons.css";
+
+// scss
+@import "./assets/scss/style.scss";
+
+///jvectormap
+@import "./assets/css/jvectormap";
+//ReactToastify
+@import '~react-toastify/dist/ReactToastify.css';
+

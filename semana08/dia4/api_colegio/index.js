@@ -1,6 +1,7 @@
 const { application } = require('express');
 const express = require('express');
 const {config} = require('./config');
+const cors = require('cors');
 
 const alumnoApi = require('./routes/alumno.routes');
 const cursoApi = require('./routes/curso.routes');
@@ -9,6 +10,8 @@ const cursoApi = require('./routes/curso.routes');
 const {errorHandler,boomErrorHandler} = require('./middlewares/error.handler');
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 

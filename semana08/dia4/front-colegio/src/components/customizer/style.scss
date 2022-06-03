@@ -1,0 +1,148 @@
+#customizer{
+    position: fixed;
+    //border: 1px solid red;
+    background-color: transparent;
+    top: 0;
+    right: 0;
+    max-width: 28rem;
+    height: 100vh;
+
+    ///////////////////////////////
+    /////  nav-pills        ///////
+    ///////////////////////////////
+    .col-sm-3{
+        height: 100vh;
+        padding-right: 0;
+        z-index: 103;
+        .nav-pills{
+            background-color: transparent;
+            margin-left: auto;
+            box-shadow: -5px 3px 5px 0px rgba(119, 119, 119, 0.15);
+        }
+
+        .nav-link{
+            background-color: #ffffff;
+            border-bottom-right-radius: unset;
+            border-top-right-radius: unset;
+
+            &:first{
+                border-bottom-left-radius: unset;
+            }
+
+            &:last{
+                border-top-left-radius: unset;
+            }
+
+            
+            
+            &.active{
+                background-color: #007bff;
+            }
+        }
+    }
+
+    &.hide{
+        .col-sm-9{
+            display: none;
+        }
+        .col-sm-3{
+            padding-right: 1rem;
+        }
+    }
+
+    &.show{
+        display: inline;
+        z-index: 103;
+
+        .col-sm-3{
+            .nav-link{
+
+                &:first{
+                    border-bottom-left-radius: unset;
+                }
+
+                &:last{
+                    border-top-left-radius: unset;
+                }
+
+            }
+        }
+
+        
+    }
+
+    .col-sm-9{
+        padding-left: 0;
+        height: 100vh;
+        background-color: #ffffff;
+        overflow: hidden;
+        box-shadow: -5px 3px 5px 0px rgba(119, 119, 119, 0.15);
+        overflow-x: hidden;
+        overflow-y: auto;
+        &.hide{
+            display: none;
+        }
+
+        &.show{
+            display: inline;
+        }
+        ///
+        .layout-action{
+            overflow: visible;
+            overflow-y: auto;
+
+            .layout-type{
+                
+                .title{
+                    margin: .3rem .2rem;
+                }
+            }
+        }
+        //
+        .color-action{
+            overflow: visible;
+            overflow-y: auto;
+            .box{
+                padding: 0;
+                .list{
+                    cursor: pointer;
+                    padding: 0.3rem;
+                    border-radius: .25rem;
+                    border: 1px solid #000000;
+                    margin: 0.3rem;
+                    div{
+                        width: 1rem;
+                        height: 1rem;
+                        &::before{
+                            content: " ";
+                        }
+
+                        
+
+                    }
+                }
+            }
+        }
+    }
+    
+
+    .tab-content{
+        
+        padding: 0.7rem;
+        .customizer-header{
+            button.close-customer-btn{
+                position: absolute;
+                right: 1.5rem;
+            }
+        }
+    }
+
+}
+
+// responsive 
+
+@media (max-width: 576px) {
+    #customizer{
+        display: none;
+    }
+}
