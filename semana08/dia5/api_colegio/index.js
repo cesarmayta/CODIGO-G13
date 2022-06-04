@@ -1,15 +1,19 @@
-const { application } = require('express');
 const express = require('express');
 const {config} = require('./config');
 const cors = require('cors');
 
-const alumnoApi = require('./routes/alumno.routes');
-const cursoApi = require('./routes/curso.routes');
-const authApi = require('./routes/auth.routes');
-
 //middlewares
 const {errorHandler,boomErrorHandler} = require('./middlewares/error.handler');
 const {verifyToken} = require('./middlewares/auth.handler');
+
+//routes
+const alumnoApi = require('./routes/alumno.routes');
+const cursoApi = require('./routes/curso.routes');
+const authApi = require('./routes/auth.routes');
+const usuarioApi = require('./routes/usuario.routes');
+
+
+
 
 const app = express();
 
@@ -28,6 +32,7 @@ app.get('/',verifyToken,(req,res)=>{
 alumnoApi(app);
 cursoApi(app);
 authApi(app);
+usuarioApi(app);
 
 //manejo de errores
 app.use(boomErrorHandler);
