@@ -7,4 +7,17 @@ tareaController.getAll = async (req,res)=>{
     res.json(tareas);
 }
 
+tareaController.create = async (req,res)=>{
+    const {nombre,estado} = req.body;
+    const nuevaTarea = new tareaModel({
+        nombre,
+        estado
+    })
+    await nuevaTarea.save();
+    res.json({
+        status:true,
+        content:nuevaTarea
+    })
+}
+
 module.exports = tareaController;
