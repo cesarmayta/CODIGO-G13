@@ -14,10 +14,7 @@ tareaController.create = async (req,res)=>{
         estado
     })
     await nuevaTarea.save();
-    res.json({
-        status:true,
-        content:nuevaTarea
-    })
+    res.json(nuevaTarea);
 }
 
 module.exports = tareaController;
