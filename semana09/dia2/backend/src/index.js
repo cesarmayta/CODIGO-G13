@@ -1,4 +1,5 @@
 const app = require('./app');
+require('./lib/mongooselib');
 
 async function main(){
     await app.listen(app.get('port'));
