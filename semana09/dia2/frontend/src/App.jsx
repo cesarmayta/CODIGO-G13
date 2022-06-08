@@ -1,10 +1,21 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container,Row,Col,Card,Button,Table,Form} from 'react-bootstrap';
+import axios from 'axios';
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tareas,setTareas] = useState([]);
+  const [nombre,setNombre] = useState('');
+  const [estado,setEstado] = useState('pendiente');
+
+  useEffect(()=>{
+    axios.get('http://localhost:5000/tarea')
+    .then(res=>{
+      console.log(res.data);
+      setTareas(res.data);
+    })
+  },[])
 
   return (
     <section className="vh-100">
@@ -36,6 +47,15 @@ function App() {
                       </tr>
                     </thead>
                     <tbody id="cuerpoTabla">
+                        {tareas.map((tarea,index)=>{
+                          return (
+                            <tr key={tarea._id}>
+                              <td>{index + 1}</td>
+                              <td>{tarea.nombre}</td>
+                              <td></td>
+                            </tr>
+                          )
+                        })}
                     </tbody>
                   </Table>
       
