@@ -17,3 +17,10 @@ class ProductoSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         representation['imagen'] = instance.imagen.url
         return representation
+
+class CategoriaProductoSerializer(serializers.ModelSerializer):
+    Productos = ProductoSerializer(many=True,read_only=True)
+    
+    class Meta:
+        model = Categoria
+        fields = ['id','nombre','Productos']
