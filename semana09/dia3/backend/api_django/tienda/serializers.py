@@ -1,7 +1,12 @@
 from dataclasses import field, fields
 from rest_framework import serializers
 
-from .models import Categoria,Producto
+from django.contrib.auth.models import User
+
+from .models import (
+    Categoria,Producto,
+    Cliente
+)
 
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,3 +29,15 @@ class CategoriaProductoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categoria
         fields = ['id','nombre','Productos']
+
+class ClienteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cliente
+        fields = ['telefono','direccion']
+
+class UsuarioSerializer(serializers.ModelSerializer):
+    Cliente = ClienteSerializer(read_only=True)
+    class Meta:
+        model = User
+        fields = ['id','first_name','last_name','email','username','Cliente']
+

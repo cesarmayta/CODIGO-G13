@@ -2,12 +2,15 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from .models import (
-    Categoria,Producto
+    Categoria,Producto,Cliente
     )
 from .serializers import (
         CategoriaSerializer,ProductoSerializer,
-        CategoriaProductoSerializer
+        CategoriaProductoSerializer,
+        UsuarioSerializer
     )
+
+from django.contrib.auth.models import User
 
 class IndexView(APIView):
 
@@ -48,6 +51,17 @@ class CategoriaProductoView(APIView):
         context = {
             'status':True,
             'content':serCategoriaProducto.data
+        }
+        return Response(context)
+
+class UsuarioView(APIView):
+    
+    def get(self,request,usuario_id):
+        dataUsuario = User.objects.get(pk=usuario_id)
+        serUsuario = UsuarioSerializer(dataUsuario)
+        context = {
+            'status':True,
+            'content':serUsuario.data
         }
         return Response(context)
 
