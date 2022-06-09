@@ -3,3 +3,4 @@ djangorestframework
 mysqlclient
 cloudinary
 python-decouple
+django-admin-tailwind
