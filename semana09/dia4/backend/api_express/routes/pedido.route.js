@@ -7,6 +7,18 @@ function pedidoApi(app){
 
     const objPedidoService = new PedidoService();
 
+    router.get('/',async function(req,res){
+        try{
+            const pedidos = await objPedidoService.getAll();
+            res.status(200).json({
+                status:true,
+                content:pedidos
+            })
+        }catch(err){
+            console.log(err);
+        }
+    })
+
     router.post("/",async function(req,res){
         const {body:pedido} = req;
         console.log(pedido);
