@@ -1,0 +1,6 @@
+django==3.2
+djangorestframework
+mysqlclient
+cloudinary
+python-decouple
+django-admin-tailwind

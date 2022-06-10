@@ -1,0 +1,8 @@
+para django
+
+1 - python -m venv venv
+2 - source venv/scripts/activate
+3 - crear requirements y gitignore
+4 - pip install -r requirements
+5 - django-admin starproject shop .
+6 - python manage.py startapp tienda
