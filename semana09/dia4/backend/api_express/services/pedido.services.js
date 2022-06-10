@@ -22,7 +22,7 @@ class PedidoService{
                     fecha:resultPedido[i].fecha,
                     nro:resultPedido[i].nro,
                     estado:resultPedido[i].estado,
-                    cliene_id:resultPedido[i].cliente_id,
+                    cliente_id:resultPedido[i].cliente_id,
                     productos: resultPedidoDetalle
                 }
                 result.push(objPedido);
