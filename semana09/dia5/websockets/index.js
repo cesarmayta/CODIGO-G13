@@ -17,5 +17,7 @@ io.on('connection',(socket)=>{
     console.log("nueva conexión por websocket con id:",socket.id);
     socket.on('mensajecliente',(data)=>{
         console.log('mensaje del cliente : ',data);
+        //io.emit('mensajeservidor',data);
+        socket.broadcast.emit('mensajeservidor',data);
     })
 })
