@@ -15,4 +15,7 @@ const io = SocketIO(server);
 
 io.on('connection',(socket)=>{
     console.log("nueva conexión por websocket con id:",socket.id);
+    socket.on('mensajecliente',(data)=>{
+        console.log('mensaje del cliente : ',data);
+    })
 })
