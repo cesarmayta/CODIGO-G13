@@ -1,0 +1,18 @@
+{
+    "fecha":"",
+    "nro":"",
+    "cliente_id":"1",
+    "productos":[
+        {
+            "producto_id":1,
+            "precio":40,
+            "cantidad":1
+        },
+        {
+            "producto_id":2,
+            "precio":60,
+            "cantidad":2
+        }
+    ]
+
+}
