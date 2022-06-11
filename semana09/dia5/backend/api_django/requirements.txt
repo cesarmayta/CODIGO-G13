@@ -6,3 +6,4 @@ python-decouple
 django-admin-tailwind
 djangorestframework-simplejwt
 django-cors-headers
+gunicorn
